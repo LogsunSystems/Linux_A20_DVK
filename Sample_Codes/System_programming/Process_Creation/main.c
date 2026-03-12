@@ -1,8 +1,11 @@
 /**
- * Title: 
- * Brief: 
+ * Title: Create Multiple Processes
+ * Brief: The program does following tasks
+ *          - Crete two child processes
+ *          - Assign them pre-compiled executable file to run
+ *          - Wait till the both child process complete their life-cycle
  * Company: Logsun Systems
- * Date: 11-03-2026
+ * Date: 12-03-2026
  * Author: Shreyas Deshpande
  *
  * -------------------------------------------------------------------------
@@ -10,17 +13,20 @@
  * -------------------------------------------------------------------------
  *
  */
-#include <gpiod.h>
+
 #include <stdio.h>
 #include <unistd.h>
+#include<sys/wait.h>
 
 int main(void)
 {
+    pid_t p1,p2;
 
-    while(1)
-    {
-        //Infinite Loop
+    p1=fork(); //Create Process-1
+    if(p1==0){
+        execl("./process1","process1",NULL); //Assign Executable file to the process-1
     }
-
+    
+    waitpid(p1,NULL,0);//Wait until process-1 gets finish it's execution.
     return 0;
 }
